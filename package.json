@@ -1,0 +1,22 @@
+{
+  "name": "curriculo-be-redirect-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx ts-node test-integration.ts"
+  },
+  "keywords": [],
+  "author": "Curriculo Be",
+  "license": "ISC",
+  "description": "OAuth 2.0/OpenID Connect integration test server with Keycloak - Documentation for client integrations",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "axios": "^1.9.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

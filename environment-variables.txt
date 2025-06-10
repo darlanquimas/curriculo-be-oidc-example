@@ -1,0 +1,120 @@
+# =============================================================================
+# Curriculo Be OAuth 2.0/OpenID Connect Integration Test Server Configuration
+# =============================================================================
+# 
+# Copy this content to a file named ".env" in the project root directory
+# to configure the application with these environment variables.
+#
+# For production use, ensure these values are kept secure and not committed
+# to version control.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# KEYCLOAK CONFIGURATION
+# -----------------------------------------------------------------------------
+# Curriculo Be's Keycloak realm endpoint
+KEYCLOAK_ENDPOINT=https://auth-dev.curriculobe.com.br/realms/bestema-dev
+
+# OAuth 2.0 client identifier (provided by Curriculo Be)
+KEYCLOAK_CLIENT_ID=<bf26131fa06e05ae84c5510e05845b0b>
+
+# OAuth 2.0 client secret (keep this secure!)
+KEYCLOAK_CLIENT_SECRET=T2HrLdQLYJWf0W1wMvOBcbh093jdBQuK
+
+# Callback URI after successful authentication
+KEYCLOAK_REDIRECT_URI=http://localhost:3000/callback
+
+# Redirect URI after successful logout
+KEYCLOAK_LOGOUT_REDIRECT_URI=http://localhost:3000/logout-success
+
+# OAuth 2.0 scopes to request (space-separated)
+KEYCLOAK_SCOPE=openid profile email
+
+# -----------------------------------------------------------------------------
+# SERVER CONFIGURATION
+# -----------------------------------------------------------------------------
+# Port number for the test server
+PORT=3000
+
+# Environment mode (development/production)
+NODE_ENV=development
+
+# Session secret for cookie signing (change this in production!)
+SESSION_SECRET=curriculo-be-integration-test-secret-2024
+
+# -----------------------------------------------------------------------------
+# OPTIONAL: PRODUCTION CONFIGURATION
+# -----------------------------------------------------------------------------
+# Uncomment and configure these for production deployment:
+
+# Production Keycloak endpoint
+# KEYCLOAK_ENDPOINT=https://auth.curriculobe.com.br/realms/bestema-prod
+
+# Production callback URLs (must use HTTPS)
+# KEYCLOAK_REDIRECT_URI=https://yourdomain.com/auth/callback
+# KEYCLOAK_LOGOUT_REDIRECT_URI=https://yourdomain.com/auth/logout-success
+
+# Production server port
+# PORT=443
+
+# Production environment
+# NODE_ENV=production
+
+# Strong session secret for production
+# SESSION_SECRET=your-strong-random-secret-here
+
+# -----------------------------------------------------------------------------
+# DEVELOPMENT/DEBUG CONFIGURATION
+# -----------------------------------------------------------------------------
+# Enable debug logging
+DEBUG=true
+
+# Log level (info, warn, error, debug)
+LOG_LEVEL=debug
+
+# Enable CORS for development
+ENABLE_CORS=true
+
+# -----------------------------------------------------------------------------
+# SECURITY CONFIGURATION
+# -----------------------------------------------------------------------------
+# Force HTTPS redirect in production
+FORCE_HTTPS=false
+
+# Secure cookie settings (auto-enabled in production)
+SECURE_COOKIES=false
+
+# CSRF protection
+ENABLE_CSRF=false
+
+# Maximum session age in milliseconds (24 hours)
+SESSION_MAX_AGE=86400000
+
+# -----------------------------------------------------------------------------
+# HOW TO USE THIS FILE
+# -----------------------------------------------------------------------------
+# 
+# 1. Copy this entire content
+# 2. Create a new file named ".env" in the project root directory
+# 3. Paste the content into the .env file
+# 4. Adjust the values as needed for your environment
+# 5. Save the file
+# 
+# The application will automatically load these variables on startup.
+# 
+# -----------------------------------------------------------------------------
+# CLIENT INTEGRATION NOTES
+# -----------------------------------------------------------------------------
+# 
+# For client applications integrating with Curriculo Be:
+# 
+# 1. Contact Curriculo Be to get your own client credentials
+# 2. Replace KEYCLOAK_CLIENT_ID and KEYCLOAK_CLIENT_SECRET with your values
+# 3. Update redirect URIs to match your application endpoints
+# 4. Use HTTPS in production (required for OAuth 2.0)
+# 5. Keep client secrets secure and never commit them to version control
+# 
+# Support: integration-support@curriculobe.com.br
+# Documentation: see CLIENT_INTEGRATION_GUIDE.md
+# 
+# ============================================================================= 

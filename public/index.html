@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculo-be Redirect Test - Painel de Controle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #28a745;
+        }
+
+        .status-info {
+            flex: 1;
+        }
+
+        .status-label {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .status-value {
+            color: #28a745;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+        }
+
+        .logs-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logs-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .clear-logs {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .clear-logs:hover {
+            background: #545b62;
+        }
+
+        .logs-container {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-timestamp {
+            color: #888;
+            font-size: 0.8em;
+        }
+
+        .log-info {
+            color: #17a2b8;
+        }
+
+        .log-success {
+            color: #28a745;
+        }
+
+        .log-error {
+            color: #dc3545;
+        }
+
+        .log-warning {
+            color: #ffc107;
+        }
+
+        .endpoints {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .endpoints h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .endpoint-list {
+            list-style: none;
+        }
+
+        .endpoint-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .endpoint-list li:last-child {
+            border-bottom: none;
+        }
+
+        .endpoint-list a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .endpoint-list a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .status {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Curriculo-be Redirect Test</h1>
+            <p>Painel de Controle para Autenticação Keycloak</p>
+        </div>
+
+        <div class="status">
+            <div class="status-info">
+                <div class="status-label">Status da Aplicação:</div>
+                <div class="status-value" id="appStatus">🟢 Servidor Online</div>
+            </div>
+            <div class="status-info">
+                <div class="status-label">Usuário:</div>
+                <div class="status-value" id="userStatus">❌ Não Autenticado</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="/login" class="btn btn-primary">🔑 Fazer Login</a>
+            <button onclick="logout()" class="btn btn-danger">🚪 Logout</button>
+            <button onclick="checkStatus()" class="btn btn-success">🔄 Verificar Status</button>
+        </div>
+
+        <div class="logs-section">
+            <div class="logs-header">
+                <div class="logs-title">📋 Console de Logs</div>
+                <button class="clear-logs" onclick="clearLogs()">Limpar</button>
+            </div>
+            <div class="logs-container" id="logsContainer">
+                <div class="log-entry log-info">
+                    <span class="log-timestamp">[${new Date().toLocaleTimeString()}]</span>
+                    Sistema inicializado. Aguardando interações...
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoints">
+            <h3>🔗 Endpoints Disponíveis:</h3>
+            <ul class="endpoint-list">
+                <li><strong>Login:</strong> <a href="/login" target="_blank">http://localhost:3000/login</a></li>
+                <li><strong>Callback:</strong> <code>http://localhost:3000/callback</code> (automático)</li>
+                <li><strong>Logout:</strong> <a href="/logout" target="_blank">http://localhost:3000/logout</a></li>
+                <li><strong>Pós-logout:</strong> <a href="/logout-success" target="_blank">http://localhost:3000/logout-success</a></li>
+                <li><strong>Status:</strong> <a href="/api/status" target="_blank">http://localhost:3000/api/status</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Conectar com o servidor via Server-Sent Events para logs em tempo real
+        let eventSource;
+        let isConnected = false;
+
+        function connectToLogs() {
+            try {
+                eventSource = new EventSource('/api/logs');
+                
+                eventSource.onopen = function() {
+                    isConnected = true;
+                    addLog('🔗 Conectado ao servidor de logs', 'success');
+                    updateAppStatus('🟢 Servidor Online - Logs Conectados');
+                };
+
+                eventSource.onmessage = function(event) {
+                    const logData = JSON.parse(event.data);
+                    addLog(logData.message, logData.type, logData.timestamp);
+                };
+
+                eventSource.onerror = function() {
+                    isConnected = false;
+                    addLog('❌ Conexão com logs perdida', 'error');
+                    updateAppStatus('🟡 Servidor Online - Logs Desconectados');
+                    
+                    // Tentar reconectar após 5 segundos
+                    setTimeout(connectToLogs, 5000);
+                };
+            } catch (error) {
+                addLog('❌ Erro ao conectar com logs: ' + error.message, 'error');
+            }
+        }
+
+        function addLog(message, type = 'info', timestamp = null) {
+            const logsContainer = document.getElementById('logsContainer');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+            
+            logEntry.innerHTML = `
+                <span class="log-timestamp">[${time}]</span>
+                ${message}
+            `;
+            
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function clearLogs() {
+            const logsContainer = document.getElementById('logsContainer');
+            logsContainer.innerHTML = `
+                <div class="log-entry log-info">
+                    <span class="log-timestamp">[${new Date().toLocaleTimeString()}]</span>
+                    Logs limpos pelo usuário.
+                </div>
+            `;
+        }
+
+        function updateAppStatus(status) {
+            document.getElementById('appStatus').textContent = status;
+        }
+
+        function updateUserStatus(status) {
+            document.getElementById('userStatus').textContent = status;
+        }
+
+        async function logout() {
+            try {
+                addLog('🚪 Iniciando processo de logout...', 'info');
+                window.location.href = '/logout';
+            } catch (error) {
+                addLog('❌ Erro ao fazer logout: ' + error.message, 'error');
+            }
+        }
+
+        async function checkStatus() {
+            try {
+                addLog('🔄 Verificando status do servidor...', 'info');
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                updateAppStatus(data.server);
+                updateUserStatus(data.user);
+                addLog('✅ Status atualizado com sucesso', 'success');
+            } catch (error) {
+                addLog('❌ Erro ao verificar status: ' + error.message, 'error');
+                updateAppStatus('🔴 Servidor Offline');
+            }
+        }
+
+        // Conectar aos logs quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('🚀 Painel de controle carregado', 'success');
+            
+            // Verificar parâmetros de URL para feedback de autenticação
+            const urlParams = new URLSearchParams(window.location.search);
+            const authStatus = urlParams.get('auth');
+            const errorType = urlParams.get('error');
+            
+            if (authStatus === 'success') {
+                addLog('🎉 Autenticação realizada com sucesso! Bem-vindo!', 'success');
+                updateUserStatus('🟢 Autenticado');
+                
+                // Limpar parâmetros da URL sem recarregar a página
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (errorType) {
+                let errorMessage = '❌ Erro na autenticação';
+                switch (errorType) {
+                    case 'no_auth_code':
+                        errorMessage = '❌ Código de autorização não encontrado';
+                        break;
+                    case 'auth_failed':
+                        errorMessage = '❌ Falha na autenticação com Keycloak';
+                        break;
+                    default:
+                        errorMessage = `❌ Erro: ${errorType}`;
+                }
+                addLog(errorMessage, 'error');
+                updateUserStatus('❌ Erro na Autenticação');
+                
+                // Limpar parâmetros da URL sem recarregar a página
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            connectToLogs();
+            checkStatus();
+        });
+
+        // Limpar conexão quando sair da página
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+    </script>
+</body>
+</html> 
